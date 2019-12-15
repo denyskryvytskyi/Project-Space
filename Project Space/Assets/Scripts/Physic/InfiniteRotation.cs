@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // бесконечное вращение планет, станицй и т. д.
 public class InfiniteRotation : MonoBehaviour

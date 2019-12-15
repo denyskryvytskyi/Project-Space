@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Orbit : MonoBehaviour
 {
     public Transform orbitObject; // то, вокруг чего вращается, в данном случае планета
     public float speed; // скорость вращения
 
-    // Update is called once per frame
     void Update()
     {
         OrbitAround();

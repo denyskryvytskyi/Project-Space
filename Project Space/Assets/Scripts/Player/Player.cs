@@ -17,7 +17,7 @@ enum playerStates { }
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private string s_Name; // имя игрока, пока не сделал возможность изменять
+    private string name; // имя игрока, пока не сделал возможность изменять
 
     [SerializeField]
     [Range(0, 100)]

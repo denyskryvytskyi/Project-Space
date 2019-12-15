@@ -6,7 +6,7 @@ public class MouseNavi : MonoBehaviour
 {
     private Vector2 targetPosition; // целевая точка
     [SerializeField]
-    private  Transform player; // координаты игрока
+    private Transform player; // координаты игрока
     public Transform dotPrefab; // префаб для визуализации точки
     public float step = 1f; // расстояние от точки до точки
     private List<Transform> path = new List<Transform>(); // массив точек - путь

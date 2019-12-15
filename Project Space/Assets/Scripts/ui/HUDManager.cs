@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
-
     [SerializeField]
     private Player player; // объект игрока
 
@@ -20,6 +17,4 @@ public class HUDManager : MonoBehaviour
 
         healthBar.fillAmount = health / 100f;    
     }
-
-
 }
