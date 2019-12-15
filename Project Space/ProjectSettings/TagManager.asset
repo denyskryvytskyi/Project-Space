@@ -3,10 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - background
-  - Sun
-  - grid cell
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - HUD
-  - Minimap
-  - Background Image
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -43,7 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: HUD
-    uniqueID: 875137215
     locked: 0
