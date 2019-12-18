@@ -1,0 +1,10 @@
+<book name="TestDiscoveryBookSystem">
+  <section id="0" name="Солнечная система">
+    <discovery name="Земля" text="Обитаемая планета Солнечной системы." />
+    <discovery name="Марс" text="4я планета Солнечной системы." />
+  </section>
+  <section id="1" name="Сектор 10">
+    <discovery name="Туманность Галея" text="Самая известная туманность зоны 4." />
+    <discovery name="Куракс" text="Единственная обитаемася планета сектора 10." />
+  </section>
+</book>
