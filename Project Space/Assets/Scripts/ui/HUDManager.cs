@@ -17,4 +17,9 @@ public class HUDManager : MonoBehaviour
 
         healthBar.fillAmount = health / 100f;    
     }
+
+    public void HideHud(bool hide)
+    {
+        gameObject.SetActive(!hide);
+    }
 }

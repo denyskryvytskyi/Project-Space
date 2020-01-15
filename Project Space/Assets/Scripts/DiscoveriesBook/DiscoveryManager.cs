@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Xml;
@@ -11,21 +10,29 @@ public class DiscoveryManager : MonoBehaviour
     public DescriptionComponent discoveryDescriptionPrefab; // текст с описание выбранного открытия
     public ButtonComponent discoveryPrefab; // кнопка-элемнт списка открытий
     public ScrollRect discoveryScrollRect; // UI список открытий
-    public ScrollRect textArea; // UI описание открытия
-
+    //
     private string fileName, lastName;
     private List<Discovery> discoveries; // временное решение (для реализации одноступенчатой иерархии)
     private List<Section> node; // !!! для многоуровневой иерархии (пока не используем)
     private Section section;
     private Discovery discovery;
-
+    //
     private bool isFirstDiscovery = true;
+    //
+    [SerializeField]
+    private GameObject discoveryBookUI;
+    //
+    private HUDManager HUDManager;
+    //
+    UIManager uiManager;
 
     public static DiscoveryManager Internal { get; set; }
 
     void Awake()
     {
         Internal = this;
+        HUDManager = FindObjectOfType<HUDManager>();
+        uiManager = UIManager.GetInstance();
     }
 
     public void DiscoveryBookOpen(string _fileName)
@@ -33,22 +40,22 @@ public class DiscoveryManager : MonoBehaviour
         if (fileName == string.Empty)
             return;
         fileName = _fileName;
-        Debug.Log("Test0");
+
+        HUDManager.HideHud(true);
+        discoveryBookUI.SetActive(true);
+        uiManager.blockPlayerMovement(true);
         Load();
     }
 
     void Load()
     {
-        Debug.Log("Test1");
-        Debug.Log(lastName);
-        Debug.Log(fileName);
         // нужно загрузить только названия открытий
-        // сейчас реализовано только 1этажная иерархия открытий
+        // сейчас реализовано только 1-уровневая иерархия открытий
         // то-есть слева список открытий - справа описание
         // поэтому подгружаем весь список открытий и их описание в массивы
-        //if (fileName != null) // проверка, чтобы не загружать уже загруженный файл
-        //{
-            Debug.Log("Test2");
+
+        if (lastName != string.Empty ? fileName != lastName : true) // проверка, чтобы не загружать уже загруженный файл
+        {
             discoveries = new List<Discovery>();
 
             try // чтение элементов XML и загрузка значений атрибутов в массивы
@@ -92,7 +99,7 @@ public class DiscoveryManager : MonoBehaviour
                 //scrollRect.gameObject.SetActive(false);
                 lastName = string.Empty;
             }
-        //}
+        }
 
         BuildBook();
     }
@@ -100,20 +107,16 @@ public class DiscoveryManager : MonoBehaviour
     void BuildElement(Discovery discovery)
     {
         ButtonComponent cloneObj = Instantiate(discoveryPrefab) as ButtonComponent;
-        DescriptionComponent desc = Instantiate(discoveryDescriptionPrefab) as DescriptionComponent;
+        DescriptionComponent desc = FindObjectOfType<DescriptionComponent>();
 
         cloneObj.text.text = discovery.name;
         cloneObj.rect.SetParent(discoveryScrollRect.content);
-        
-        if(isFirstDiscovery)
+
+        if (isFirstDiscovery)
         {
-            Debug.Log(discovery.name);
-            Debug.Log("DESCRIPTION");
             desc.text.text = discovery.text;
-            desc.rect.SetParent(textArea.content);
             isFirstDiscovery = false;
         }
-
     }
 
     void BuildBook()
@@ -124,8 +127,6 @@ public class DiscoveryManager : MonoBehaviour
         }
     }
 }
-
-
 
 class Section
 {

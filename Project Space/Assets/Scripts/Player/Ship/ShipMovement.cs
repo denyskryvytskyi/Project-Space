@@ -4,41 +4,47 @@
 public class ShipMovement : MonoBehaviour
 {
     [SerializeField]
-    public float _speed; //  скорость корабля
+    public float speed; //  скорость корабля
 
     [SerializeField]
-    private bool _move; // состояние корабля: 0 - стоит, 1 - двигается
+    public bool isMoving = false; // состояние корабля: false - стоит, true - двигается
 
     [SerializeField]
-    public bool _canMove = true; // может двигаться или нет
+    public bool canMove = true; // может двигаться или нет
 
-    private Vector3 _target; // Точка-цель движения
+    private Vector3 target; // Точка-цель движения
+    //
+    [SerializeField]
+    private CheckClicks clickChecker;
+    //
+    UIManager uiManager;
+
+    private void Awake()
+    {
+        uiManager = UIManager.GetInstance();
+    }
 
     void Update()
     {
-        if(_canMove == true)
+        if(canMove && !uiManager.isWindowOpened)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !clickChecker.IsHud())
             {
-                _target = Camera.main.ScreenToWorldPoint(Input.mousePosition); // координаты нажатия ЛКМ пересчитываем в координаты мира.
-                _target.z = transform.position.z;
-                if (_move == false)
+                target = Camera.main.ScreenToWorldPoint(Input.mousePosition); // координаты нажатия ЛКМ пересчитываем в координаты мира.
+                target.z = transform.position.z;
+                if (!isMoving)
                 {
-                    _move = true;
+                    isMoving = true;
                 }
             }
-            if(transform.position == _target) // если корабль игрока достиг цели
+            if(transform.position == target) // если корабль игрока достиг цели
             {
-                _move = false; // то он не двигается
+                isMoving = false; // то он не двигается
             }
-            if (_move == true) // если корабль двигается, то вращаем его к цели (нос корабля указывает на таргет)
+            if (isMoving) // если корабль двигается, то вращаем его к цели (нос корабля указывает на таргет)
             {
                 RotateObject();
-                transform.position = Vector3.MoveTowards(transform.position, _target, _speed * Time.deltaTime);
-            }
-            else // если _move==false
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             }
         }
     }
@@ -46,11 +52,10 @@ public class ShipMovement : MonoBehaviour
     // вращение корабля игрока к точке назначения
     void RotateObject()
     {
-        Vector3 diff = _target - transform.position;
+        Vector3 diff = target - transform.position;
         diff.Normalize();
 
         float angleRotZ = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg; // угол поворота
-        Debug.Log("angleRotZ: " + angleRotZ);
         transform.rotation = Quaternion.Euler(0f, 0f, angleRotZ - 90);
     }
 }

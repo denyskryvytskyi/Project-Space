@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class MouseNavi : MonoBehaviour
 {
-    private Vector2 targetPosition; // целевая точка
-    [SerializeField]
-    private Transform player; // координаты игрока
+    public static bool isDone { get; private set; }  // два использования: 1. путь построен. 2. точка пройдена
+    //
     public Transform dotPrefab; // префаб для визуализации точки
     public float step = 1f; // расстояние от точки до точки
+    [SerializeField]
+    private Transform player; // координаты игрока
+    //
+    private Vector2 targetPosition; // целевая точка
     private List<Transform> path = new List<Transform>(); // массив точек - путь
     private int index = -1;
     private Vector2 position; // текущая позиция новой точки пути
-    public static bool isDone { get; private set; }  // два использования: 1. путь построен. 2. точка пройдена
+    //
+    [SerializeField]
+    private CheckClicks clickChecker;
+    //
+    ShipMovement shipMovementManager;
+    //
+    UIManager uiManager;
+
+    private void Awake()
+    {
+        shipMovementManager = FindObjectOfType<ShipMovement>();
+        uiManager = UIManager.GetInstance();
+    }
 
     // добавление префаба точки на сцену
     void AddDot(Vector2 curPos)
@@ -37,26 +52,32 @@ public class MouseNavi : MonoBehaviour
 
     void Update()
     {
-        if(FindObjectOfType<ShipMovement>()._canMove == true)
+        if (!uiManager.isWindowOpened)
         {
-            if (Input.GetMouseButtonUp(0))
+            if (shipMovementManager.canMove)
             {
-                // если путь уже установлен, то удаляем и создаем новый
-                if (isDone)
+                if (Input.GetMouseButtonUp(0) && !clickChecker.IsHud())
                 {
-                    ClearPath();
-                }
+                    // если путь уже установлен, то удаляем и создаем новый
+                    if (isDone)
+                    {
+                        ClearPath();
+                    }
 
-                // задаем путь
-                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                position = player.position;
-                DoAction();
-                isDone = true;
-                Debug.Log("Путь построен");
+                    // задаем путь
+                    targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    position = player.position;
+                    DoAction();
+                    isDone = true;
+                }
             }
 
-            UpdatePath();
+            if (shipMovementManager.isMoving)
+            {
+                UpdatePath();
+            }
         }
+        
     }
 
     // Удаляем точки пути
@@ -69,7 +90,6 @@ public class MouseNavi : MonoBehaviour
         }
         path.Clear();
         isDone = false;
-        Debug.Log("Путь очищен");
     }
 
     // обновление массива точек пути (если корабль двигается, необходимо удалять пройденные точки)
@@ -80,7 +100,7 @@ public class MouseNavi : MonoBehaviour
         // Механизм следующий: берем индекс первой точки и сравниваем расстояние от нее до позиии игрока, если меньше 0.1 - удаляем, увеличиваем индекс
         // Далее сравниваем расстояние до след точки
         // Если путь перестроен, массив обновлен, и индекс сбрасывается соответственно до -1, чтобы начинать с первой точки (сброс в методе Clear Path)
-        if(index == -1)
+        if (index == -1)
             index = 0;
 
         if(index < path.Count && index >= 0)
