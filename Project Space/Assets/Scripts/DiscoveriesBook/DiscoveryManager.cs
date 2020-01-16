@@ -35,7 +35,9 @@ public class DiscoveryManager : MonoBehaviour
         uiManager = UIManager.GetInstance();
     }
 
-    public void DiscoveryBookOpen(string _fileName)
+    // ВЫДЕЛИТЬ Функции Open, Close, Build, Clean в отдельный вирутальный класс (интерфейс)
+    // открыть окно книги
+    public void Open(string _fileName)
     {
         if (fileName == string.Empty)
             return;
@@ -82,7 +84,6 @@ public class DiscoveryManager : MonoBehaviour
 
                             // !!! node[index].discoveries.Add(discovery);
                             discoveries.Add(discovery); // временно 
-                            Debug.Log("Discovery added.");
                         }
                         inner.Close();
 
@@ -125,6 +126,20 @@ public class DiscoveryManager : MonoBehaviour
         {
             BuildElement(discovery);
         }
+    }
+
+    void Clean()
+    {
+        discoveries.Clear();
+        //node.Clear();
+    }
+
+    public void Close()
+    {
+        Clean();
+        discoveryBookUI.SetActive(false);
+        HUDManager.HideHud(false);
+        UIManager.GetInstance().blockPlayerMovement(false);
     }
 }
 

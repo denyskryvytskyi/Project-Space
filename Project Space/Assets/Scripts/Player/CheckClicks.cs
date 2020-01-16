@@ -27,4 +27,10 @@ public class CheckClicks : MonoBehaviour
 
         return false;
     }
+
+    public void ClickBtnExit()
+    {
+        DiscoveryManager.Internal.Close();
+        UIManager.GetInstance().blockPlayerMovement(false);
+    }
 }
