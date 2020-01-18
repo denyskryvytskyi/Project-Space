@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Xml;
@@ -26,11 +27,22 @@ public class DiscoveryManager : MonoBehaviour
     //
     UIManager uiManager;
 
-    public static DiscoveryManager Internal { get; set; }
+    private static DiscoveryManager Internal { get; set; }
+
+    public static DiscoveryManager GetInstance()
+    {
+        if (Internal == null)
+        {
+            Internal = new DiscoveryManager();
+        }
+
+        return Internal;
+    }
 
     void Awake()
-    {
+    { 
         Internal = this;
+
         HUDManager = FindObjectOfType<HUDManager>();
         uiManager = UIManager.GetInstance();
     }
@@ -139,7 +151,36 @@ public class DiscoveryManager : MonoBehaviour
         Clean();
         discoveryBookUI.SetActive(false);
         HUDManager.HideHud(false);
-        UIManager.GetInstance().blockPlayerMovement(false);
+        StartCoroutine("StartWaiting", 0.25f);
+    }
+
+    // задержка нужна чтобы не строить сразу путь
+    IEnumerator StartWaiting()
+    {
+        yield return new WaitForSeconds(0.25f);
+        uiManager.blockPlayerMovement(false);
+    }
+
+
+
+    Discovery FindDiscoveryByName(string name)
+    {
+        foreach(Discovery discovery in discoveries)
+        {
+            if(discovery.name == name)
+            {
+                return discovery;
+            }
+        }
+
+        return null;
+    }
+
+    public void OpenDiscovery(string name)
+    {
+        Discovery discovery = FindDiscoveryByName(name);
+        DescriptionComponent desc = FindObjectOfType<DescriptionComponent>();
+        desc.text.text = discovery.text;
     }
 }
 

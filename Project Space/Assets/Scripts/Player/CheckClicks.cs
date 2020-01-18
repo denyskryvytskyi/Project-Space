@@ -30,7 +30,12 @@ public class CheckClicks : MonoBehaviour
 
     public void ClickBtnExit()
     {
-        DiscoveryManager.Internal.Close();
-        UIManager.GetInstance().blockPlayerMovement(false);
+        DiscoveryManager.GetInstance().Close();
+    }
+
+    public void ClickDiscovery(Text name)
+    {
+
+        DiscoveryManager.GetInstance().OpenDiscovery(name.text);
     }
 }
