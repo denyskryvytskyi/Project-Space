@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - background
-  - grid cell
+  - Enemy
+  - Booster_shield
+  - Booster
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,12 +17,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PostProcessing
+  - Background
+  - Player
+  - Enemy
+  - Invulnerable
+  - Booster
   - 
   - 
   - 
@@ -42,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 199572791
+    locked: 0
+  - name: Ship
+    uniqueID: 678153975
     locked: 0
