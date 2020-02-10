@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BoosterSpawner : MonoBehaviour
@@ -35,9 +34,7 @@ public class BoosterSpawner : MonoBehaviour
 
             Vector2 spawnPosition = new Vector2(spawnX, spawnY);
 
-
             objectPooler.SpawnFromPool(boosters[sizeIndex], spawnPosition, Quaternion.identity);
         }
     }
-
 }

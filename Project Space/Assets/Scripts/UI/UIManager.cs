@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class UIManager
+﻿public class UIManager
 {
     public bool isWindowOpened = false; // октрыто ли какое-либо игровое окно (для блокировки корабля)
 

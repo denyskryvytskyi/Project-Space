@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -20,7 +19,7 @@ public class CheckClicks : MonoBehaviour
         pointerData.position = Input.mousePosition;
         this.raycaster.Raycast(pointerData, results);
 
-        if(results.Count > 0)
+        if (results.Count > 0)
         {
             return true;
         }

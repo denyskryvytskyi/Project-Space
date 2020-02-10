@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerBoosters : MonoBehaviour
 {
@@ -13,7 +11,6 @@ public class PlayerBoosters : MonoBehaviour
         float time = shield.GetComponent<Booster>().actionTime;
         DamageHandler damageHandler = gameObject.GetComponent<DamageHandler>();
         damageHandler.isShield = true;
-        damageHandler.StartInvulnerable(time); 
-        
+        damageHandler.StartInvulnerable(time);
     }
 }

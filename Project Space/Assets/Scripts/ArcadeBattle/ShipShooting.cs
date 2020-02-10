@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShipShooting : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class ShipShooting : MonoBehaviour
 
     public float fireDelay = 0.25f;
     float cooldownTimer = 0;
-    
+
     bool isPlayer = false;
     bool isFire = false;
 
@@ -33,7 +31,7 @@ public class ShipShooting : MonoBehaviour
     {
         cooldownTimer -= Time.deltaTime;
 
-        if(isPlayer)
+        if (isPlayer)
         {
             isFire = Input.GetButton("Fire1");
         }
@@ -50,10 +48,10 @@ public class ShipShooting : MonoBehaviour
                 }
             }
         }
-        
-        if(isFire && cooldownTimer <= 0)
+
+        if (isFire && cooldownTimer <= 0)
         {
-            if(isPlayer || (!isPlayer && player != null))
+            if (isPlayer || (!isPlayer && player != null))
             {
                 // Check the boundaries
                 // shoot only if position is on the screen

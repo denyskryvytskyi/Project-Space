@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MouseNavi : MonoBehaviour
@@ -38,16 +37,16 @@ public class MouseNavi : MonoBehaviour
     }
 
     // основная функция, создание маршрута
-    void DoAction() 
+    void DoAction()
     {
         float dist = step;
-        
+
         do
         {
             dist = Vector3.Distance(position, targetPosition);
             AddDot(position);
             position = position + (targetPosition - position) * step / dist;
-        }while(dist >= step);
+        } while (dist >= step);
     }
 
     void Update()
@@ -77,7 +76,7 @@ public class MouseNavi : MonoBehaviour
                 UpdatePath();
             }
         }
-        
+
     }
 
     // Удаляем точки пути
@@ -103,7 +102,7 @@ public class MouseNavi : MonoBehaviour
         if (index == -1)
             index = 0;
 
-        if(index < path.Count && index >= 0)
+        if (index < path.Count && index >= 0)
         {
             float dist = Vector3.Distance(path[index].position, player.position);
             //Debug.Log("dots count :" + path.Count + "; dist: " + dist + "; index:" + index);
@@ -114,6 +113,6 @@ public class MouseNavi : MonoBehaviour
                 path.RemoveAt(index);
             }
         }
-       
+
     }
 }

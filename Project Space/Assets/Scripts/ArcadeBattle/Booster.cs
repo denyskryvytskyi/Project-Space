@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Booster : MonoBehaviour
 {
@@ -16,7 +14,7 @@ public class Booster : MonoBehaviour
     {
         timer -= Time.deltaTime;
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
             timer = actionTime;
             gameObject.SetActive(false);

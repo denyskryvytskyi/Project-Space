@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SelfDestruct : MonoBehaviour, IPooledObject
 {
@@ -17,7 +15,7 @@ public class SelfDestruct : MonoBehaviour, IPooledObject
     {
         timer -= Time.deltaTime;
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
             // Move to object pool
             gameObject.SetActive(false);

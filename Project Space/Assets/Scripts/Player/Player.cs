@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 enum playerStates { }
-
 
 /* Класс описывает обьект "Игрок"
  * Содержит следующие поля:
@@ -13,7 +10,7 @@ enum playerStates { }
  * 4. Заряд оружия
  * 5. Уровень состояния оружия
  */
- // Думаю можно сделать синглтон
+// Думаю можно сделать синглтон
 public class Player : MonoBehaviour
 {
     [SerializeField]

@@ -26,7 +26,7 @@ public class ShipMovement : MonoBehaviour
 
     void Update()
     {
-        if(canMove && !uiManager.isWindowOpened)
+        if (canMove && !uiManager.isWindowOpened)
         {
             if (Input.GetMouseButtonDown(0) && !clickChecker.IsHud())
             {
@@ -37,7 +37,7 @@ public class ShipMovement : MonoBehaviour
                     isMoving = true;
                 }
             }
-            if(transform.position == target) // если корабль игрока достиг цели
+            if (transform.position == target) // если корабль игрока достиг цели
             {
                 isMoving = false; // то он не двигается
             }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DamageHandler : MonoBehaviour
 {
@@ -21,20 +19,20 @@ public class DamageHandler : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private float health = 1;
-        
+
     float invulnTimer = 0;
     int defaultLayer = 0;
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
+
         defaultLayer = gameObject.layer;
 
         // This only get the rendere on the parnet object.
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        if(gameObject.CompareTag("Player"))
+
+        if (gameObject.CompareTag("Player"))
         {
             healthBar = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
             playerParams = GameObject.Find("PlayerSettings").GetComponent<PlayerParams>();
@@ -45,7 +43,7 @@ public class DamageHandler : MonoBehaviour
         {
             spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
 
-            if(spriteRenderer == null)
+            if (spriteRenderer == null)
             {
                 Debug.LogError("Object '" + gameObject.name + "' has no sprite renderer.");
             }
@@ -54,26 +52,26 @@ public class DamageHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Booster"))
+        if (other.CompareTag("Booster"))
         {
             other.gameObject.SetActive(false);
 
             switch (type)
             {
                 case BoosterType.Shield:
+                {
+                    isShield = true;
+                    PlayerBoosters pb = gameObject.GetComponent<PlayerBoosters>();
+                    if (pb != null)
                     {
-                        isShield = true;
-                        PlayerBoosters pb = gameObject.GetComponent<PlayerBoosters>();
-                        if (pb != null)
-                        {
-                            pb.GenerateShield();
-                        }
+                        pb.GenerateShield();
                     }
-                    break;
+                }
+                break;
 
             }
         }
-        else if(!isShield)
+        else if (!isShield)
         {
             health--;
             if (gameObject.CompareTag("Player"))
@@ -102,7 +100,7 @@ public class DamageHandler : MonoBehaviour
             {
                 isShield = false;
                 gameObject.layer = defaultLayer;
-                if(spriteRenderer != null)
+                if (spriteRenderer != null)
                 {
                     spriteRenderer.enabled = true;
                 }
@@ -123,14 +121,14 @@ public class DamageHandler : MonoBehaviour
     }
     void Die()
     {
-        if(gameObject.CompareTag("Enemy"))
+        if (gameObject.CompareTag("Enemy"))
         {
-            if(!gameManager.gameOver)
+            if (!gameManager.gameOver)
             {
                 gameManager.UpdateScore(1);
             }
         }
-        else if(gameObject.CompareTag("Player"))
+        else if (gameObject.CompareTag("Player"))
         {
             gameManager.GameOver();
         }

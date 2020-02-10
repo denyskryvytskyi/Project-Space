@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FacesPlayer : MonoBehaviour
 {
@@ -10,11 +8,11 @@ public class FacesPlayer : MonoBehaviour
 
     private void Update()
     {
-        if(player == null)
+        if (player == null)
         {
             GameObject go = GameObject.FindGameObjectWithTag("Player");
 
-            if(go != null)
+            if (go != null)
             {
                 player = go.transform;
             }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -40,11 +38,11 @@ public class GameManager : MonoBehaviour
     {
         if (gameOver)
         {
-            if(Input.GetKey(KeyCode.R))
+            if (Input.GetKey(KeyCode.R))
             {
                 RestartGame();
             }
-            else if(Input.GetKey(KeyCode.M))
+            else if (Input.GetKey(KeyCode.M))
             {
                 ShowMenu();
             }

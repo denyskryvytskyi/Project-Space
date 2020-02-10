@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SpaceshipControl : MonoBehaviour {
+public class SpaceshipControl : MonoBehaviour
+{
 
     public Rigidbody2D rb;
 
@@ -30,7 +29,7 @@ public class SpaceshipControl : MonoBehaviour {
         transform.position = newPos;
     }
 
-    void FixedUpdate () 
+    void FixedUpdate()
     {
         // Movement
         Vector3 velocity = new Vector3(0, thrustInput * thrust * Time.deltaTime, 0);

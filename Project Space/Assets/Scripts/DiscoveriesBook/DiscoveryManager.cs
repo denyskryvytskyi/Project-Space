@@ -40,7 +40,7 @@ public class DiscoveryManager : MonoBehaviour
     }
 
     void Awake()
-    { 
+    {
         Internal = this;
 
         HUDManager = FindObjectOfType<HUDManager>();
@@ -165,9 +165,9 @@ public class DiscoveryManager : MonoBehaviour
 
     Discovery FindDiscoveryByName(string name)
     {
-        foreach(Discovery discovery in discoveries)
+        foreach (Discovery discovery in discoveries)
         {
-            if(discovery.name == name)
+            if (discovery.name == name)
             {
                 return discovery;
             }

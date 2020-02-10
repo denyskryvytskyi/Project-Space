@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AsteroidController : MonoBehaviour, IPooledObject
 {
@@ -19,7 +17,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
     private void Start()
     {
         boundariesRadius = GetComponent<Renderer>().bounds.size.x;
-        asteroidSpawner =  GameObject.Find("AsteroidSpawner").GetComponent<AsteroidSpawner>();
+        asteroidSpawner = GameObject.Find("AsteroidSpawner").GetComponent<AsteroidSpawner>();
         objectPooler = ObjectPooler.Instance;
     }
 
@@ -45,7 +43,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Bullet"))
+        if (other.CompareTag("Bullet"))
         {
             int count = 2;
 
@@ -61,7 +59,7 @@ public class AsteroidController : MonoBehaviour, IPooledObject
 
     void InstantiateAsteroid(int sizeIndex, int count)
     {
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             objectPooler.SpawnFromPool(asteroidSpawner.asteroidSize[sizeIndex], transform.position, transform.rotation);
         }

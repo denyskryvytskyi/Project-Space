@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -22,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if(!gameManager.gameOver)
+        if (!gameManager.gameOver)
         {
             timer -= Time.deltaTime;
 
