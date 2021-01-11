@@ -13,7 +13,7 @@ public class ScaleBackground : MonoBehaviour
         var height = topRight.y - bottomLeft.y;
         var width = topRight.x - bottomLeft.x;
 
-        transform.localScale = new Vector3(width / 19.20f, height / 10.80f, 1f);
+        transform.localScale = new Vector3(width / 16.0f, height / 9.0f, 1f);
         Debug.Log(gameObject.name);
     }
 }

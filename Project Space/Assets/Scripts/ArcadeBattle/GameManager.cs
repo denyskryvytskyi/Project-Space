@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
 
     private int score;
 
+    [SerializeField]
+    private int scoreToWin;
+
     private void Start()
     {
         StartGame();
@@ -46,6 +49,12 @@ public class GameManager : MonoBehaviour
             {
                 ShowMenu();
             }
+        }
+
+        if (score >= scoreToWin)
+        {
+            // win
+            SceneManager.LoadScene(1);
         }
     }
 
